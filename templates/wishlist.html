@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Покупки
+{% endblock%}
+
+{% block body%}
+<div >
+  <div class="container overflow-hidden">
+    <div>
+      <div class="container">
+        <div class="row row-cols-3">
+          {% for lot in lots %}
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ lot.name }}
+                  {% if lot.status %}
+                   <p class="text-danger">Продано</p> 
+                  {% else %}
+                   <p class="text-success">Не продано</p> 
+                  {% endif %}
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ lot.price }} &#8381</h6>
+                <p class="card-text">{{ lot.description }}</p>
+                <div class="ontainer px-4">
+                  <div class="row gx-5">
+                    <a href="/lot/{{lot.id}}" class="btn btn-primary col" role="button">
+                      Подробнее
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%}
+
