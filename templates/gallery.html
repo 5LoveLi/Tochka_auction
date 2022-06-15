@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Купить
+{% endblock%}
+
+{% block body%}
+<div>
+  <div class="container overflow-hidden">
+    <div>
+      <div class="container">
+        <div class="row row-cols-3">
+          {% for lot in lots %}
+          <div class="p-1">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ lot.name }}
+                  {% if lot.status %}
+                   <p class="text-danger">Продано</p> 
+                  {% else %}
+                   <p class="text-success">Не продано</p> 
+                  {% endif %}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ lot.price }} &#8381</h6>
+                <p class="card-text">{{ lot.description }}</p>
+                <a href="/lot/{{lot.id}}" class="btn btn-lg btn-primary" role="button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                  </svg>
+                  Купить
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%}
+
+
