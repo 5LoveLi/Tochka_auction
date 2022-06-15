@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Продать
+{% endblock%}
+
+{% block body%}
+<div >
+  <div class="container overflow-hidden">
+    <h1></h1>
+    <div>
+      {% for lot in lots %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ lot.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ lot.price }} &#8381</h6>
+            <p class="card-text">{{ lot.description }}</p>
+            {% if lot.status %}
+              <p class="card-text"><b>Лот был продан:</b> <br> {{ lot.time}}</p>
+            {% elif lot.time != None %}
+              <p class="card-text"><b>Лот будет продан:</b> <br> {{ lot.time}}</p>
+            {% else %}
+              <p class="card-text"> Вы первый покупатель</p>
+            {% endif %}
+            </p>
+            <p class="card-text"><b>Продавец: </b> 
+              {% for author in authors%}
+                <a href="/lot/other/{{lot.id_author}}" class="link-dark">{{author.login}}</a> 
+              {% endfor %}
+            </p>
+            <form method="post">
+              {% if lot.status%}
+                <p class="card-text"><b> Товар продан за {{ lot.price }} </b> 
+              {% else %}
+                {% if lot.time != None %}
+                  <div class="form-floating">
+                    <input type="int" class="form-control" id="validationCustom03" name="increase" required>
+                    <label for="floatingInput">Повысить цену</label>
+                  </div>
+                {% else %}
+                  <p class="card-text"> Вам не надо поднимать цену</p>
+              {% endif %}
+              <div class="mt-2">
+                <button class="btn btn-primary" type="submit">Купить</button>
+              </div>
+                {% endif %}
+              
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock%}
